@@ -1,11 +1,11 @@
-import "./styles.css";
-import Orders from "./components/Orders";
-import styled from "styled-components";
+import './styles.css';
+import styled from 'styled-components';
+import Orders from './components/Orders';
 
 const StyledApp = styled.div`
   height: 100vh;
   width: 100vw;
-  
+   
   background: #111;
   
   display: flex;
