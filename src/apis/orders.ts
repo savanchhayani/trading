@@ -50,6 +50,7 @@ export interface Instrument {
     totalInvested: number;
     currentValue: number;
     ltp: string;
+    profitInPercentage: string;
 }
 
 const coinNames: { [key: string]: string } = {
@@ -69,6 +70,11 @@ const coinNames: { [key: string]: string } = {
 const getToFixed2 = (value: number) => parseFloat(value.toFixed(2))
 const getToFixed5 = (value: number) => parseFloat(value.toFixed(5))
 
+export const getPercentage = (currentValue: number, investedValue: number): string => {
+    const profitInRs = currentValue - investedValue;
+    return ((profitInRs / investedValue) * 100).toFixed(2);
+}
+
 export const getInstruments = (tickers: any): Instrument[] => {
     return Object.entries(getOrders()).map(
         ([type, list]) => {
@@ -79,6 +85,7 @@ export const getInstruments = (tickers: any): Instrument[] => {
                 averagePrice: 0,
                 currentValue: 0,
                 ltp: tickers[type].buy,
+                profitInPercentage: '0',
             };
 
             return (list).reduce(
@@ -91,6 +98,7 @@ export const getInstruments = (tickers: any): Instrument[] => {
                         ob.currentValue = getToFixed2(ob.qty * parseFloat(tickers[type].buy))
                         ob.totalInvested = getToFixed2(ob.totalInvested)
                         ob.qty = getToFixed5(ob.qty)
+                        ob.profitInPercentage = getPercentage(ob.currentValue, ob.totalInvested)
                     }
                     return ob;
                 },

@@ -18,6 +18,7 @@ const Header = () => (
         <span className="ltp">LTP</span>
         <span className="total-invested">Total Invested</span>
         <span className="current-value">Total Current Value</span>
+        <span className="pro-in-per">Profit in percentage</span>
     </StyledHeader>
 );
 

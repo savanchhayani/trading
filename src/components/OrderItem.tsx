@@ -18,7 +18,7 @@ interface Props {
     instrument: Instrument
 }
 
-const OrderItem = ({instrument: {name, averagePrice, totalInvested, qty, currentValue, ltp}}: Props) => {
+const OrderItem = ({instrument: {name, averagePrice, totalInvested, qty, currentValue, ltp, profitInPercentage}}: Props) => {
     return (
         <StyledOrder>
             <span className="name">{name}</span>
@@ -27,6 +27,7 @@ const OrderItem = ({instrument: {name, averagePrice, totalInvested, qty, current
             <span className="ltp">{ltp}</span>
             <span className="total-invested">{totalInvested}</span>
             <span className="current-value">{currentValue}</span>
+            <span className="pro-in-per">{profitInPercentage}</span>
         </StyledOrder>
     );
 };

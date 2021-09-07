@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import OrderHeader from './OrderHader';
 import OrderItems from './OrderItems';
 import useLiveData from '../hooks/useLiveData';
+import {getPercentage} from "../apis/orders";
 
 const StyledOrdersContainer = styled.div`
   display: flex;
@@ -23,8 +24,9 @@ const StyledTitle = styled.div`color: #666;`;
 const StyledNumber = styled.div`color: rgb(187, 187, 187);`;
 const StyledForPerText = styled.div<any>`
   ${(props) => `color: ${props.value > 0 ? green : red};`
-}
+}  
 `;
+
 const Orders = () => {
   const { loading, orders } = useLiveData();
   const { totalInvested, totalCurrentValue } = orders.reduce(
@@ -35,8 +37,7 @@ const Orders = () => {
     },
     { totalInvested: 0, totalCurrentValue: 0 },
   );
-  const profitInRs = totalCurrentValue - totalInvested;
-  const profitInPercentage = ((profitInRs / totalInvested) * 100).toFixed(2);
+  const profitInPercentage = getPercentage(totalCurrentValue, totalInvested)
 
   return (
     <StyledOrdersContainer>
