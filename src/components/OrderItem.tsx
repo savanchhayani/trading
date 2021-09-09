@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import {orderColumns} from "./styles";
-import {Instrument} from "../apis/orders";
+import { orderColumns } from "./styles";
+import { Instrument } from "../apis/orders";
+import { StyledForPerText } from "./Orders";
 
 const StyledOrder = styled.div`
   display: flex;
@@ -8,28 +9,48 @@ const StyledOrder = styled.div`
   text-align: left;
 
   ${orderColumns};
-  
+
   padding: 18px;
   color: rgb(187, 187, 187);
   border-bottom: 1px solid #232325;
 `;
 
 interface Props {
-    instrument: Instrument
+  instrument: Instrument;
 }
 
-const OrderItem = ({instrument: {name, averagePrice, totalInvested, qty, currentValue, ltp, profitInPercentage}}: Props) => {
-    return (
-        <StyledOrder>
-            <span className="name">{name}</span>
-            <span className="qty">{qty}</span>
-            <span className="avg-price">{averagePrice}</span>
-            <span className="ltp">{ltp}</span>
-            <span className="total-invested">{totalInvested}</span>
-            <span className="current-value">{currentValue}</span>
-            <span className="pro-in-per">{profitInPercentage}</span>
-        </StyledOrder>
-    );
+const StyledPer = styled.span`
+  font-size: 12px;
+  margin-left: 3px;
+`;
+
+const OrderItem = ({
+  instrument: {
+    name,
+    averagePrice,
+    totalInvested,
+    qty,
+    currentValue,
+    ltp,
+    profitInPercentage,
+  },
+}: Props) => {
+  return (
+    <StyledOrder>
+      <span className="name">{name}</span>
+      <span className="qty">{qty}</span>
+      <span className="avg-price">{averagePrice}</span>
+      <span className="ltp">{ltp}</span>
+      <span className="total-invested">{totalInvested}</span>
+      <span className="current-value">{currentValue}</span>
+      <span className="pro-in-per">
+        <StyledForPerText value={profitInPercentage}>
+          {profitInPercentage}
+          <StyledPer>%</StyledPer>
+        </StyledForPerText>
+      </span>
+    </StyledOrder>
+  );
 };
 
 export default OrderItem;
