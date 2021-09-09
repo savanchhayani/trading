@@ -19,9 +19,17 @@ interface Props {
   instrument: Instrument;
 }
 
-const StyledPer = styled.span`
-  font-size: 12px;
-  margin-left: 3px;
+const StyledPerSign = styled.span`
+  font-size: 10px;
+  margin-left: 1px;
+`;
+
+const StyledProfitInRs = styled.span`
+  margin-right: 5px;
+`;
+
+const StyledPercentage = styled.span`
+  font-size: 10px;
 `;
 
 const OrderItem = ({
@@ -45,8 +53,14 @@ const OrderItem = ({
       <span className="current-value">{currentValue}</span>
       <span className="pro-in-per">
         <StyledForPerText value={profitInPercentage}>
-          {profitInPercentage}
-          <StyledPer>%</StyledPer>
+          <StyledProfitInRs>
+            {(currentValue - totalInvested).toFixed(2)}
+          </StyledProfitInRs>
+
+          <StyledPercentage>
+            ({profitInPercentage}
+            <StyledPerSign>%</StyledPerSign>)
+          </StyledPercentage>
         </StyledForPerText>
       </span>
     </StyledOrder>

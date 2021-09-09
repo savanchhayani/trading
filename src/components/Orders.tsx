@@ -14,11 +14,7 @@ const StyledOrdersContainer = styled.div`
   max-width: 1080px;
 `;
 
-const StyledTitlePrice = styled.div`
-  > div:nth-child(2) {
-    font-size: 28px;
-  }
-`;
+const StyledTitlePrice = styled.div``;
 
 const green = "#5b9a5d";
 const red = "#e25f5b";
@@ -30,9 +26,15 @@ const StyledTitle = styled.div`
 
 const StyledNumber = styled.div`
   color: rgb(187, 187, 187);
+  font-size: 18px;
 `;
+
 export const StyledForPerText = styled.div<any>`
   ${(props) => `color: ${props.value > 0 ? green : red};`}
+`;
+
+export const StyledProfitInRs = styled.span`
+  margin-right: 3px;
 `;
 
 const Flex = styled.div`
@@ -40,6 +42,14 @@ const Flex = styled.div`
   align-items: center;
   justify-content: center;
   column-gap: 50px;
+`;
+
+const StyledPerSign = styled.span`
+  font-size: 12px;
+`;
+
+const StyledPercentage = styled.span`
+  font-size: 12px;
 `;
 
 const Orders = () => {
@@ -58,17 +68,23 @@ const Orders = () => {
 
       <Flex>
         <StyledTitlePrice>
-          <StyledTitle>Total Invested:</StyledTitle>
+          <StyledTitle>Total Invested</StyledTitle>
           <StyledNumber>{totalInvested.toFixed(2)}</StyledNumber>
         </StyledTitlePrice>
         <StyledTitlePrice>
-          <StyledTitle>Total Current Value:</StyledTitle>
+          <StyledTitle>Total Current Value</StyledTitle>
           <StyledNumber>{totalCurrentValue.toFixed(2)}</StyledNumber>
         </StyledTitlePrice>
         <StyledTitlePrice>
-          <StyledTitle>In %:</StyledTitle>
+          <StyledTitle>Profit</StyledTitle>
           <StyledForPerText value={profitInPercentage}>
-            {profitInPercentage}
+            <StyledProfitInRs>
+              {(totalCurrentValue - totalInvested).toFixed(2)}
+            </StyledProfitInRs>
+            <StyledPercentage>
+              ({profitInPercentage}
+              <StyledPerSign>%</StyledPerSign>)
+            </StyledPercentage>
           </StyledForPerText>
         </StyledTitlePrice>
       </Flex>
