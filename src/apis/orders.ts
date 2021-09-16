@@ -18,9 +18,12 @@ export interface Order {
 
 type OrdersMap = { [key: Market]: Order[] };
 
-export const getOrders = () => {
+export const getOrders = (selectedCurrency: string) => {
   const ordersMap: OrdersMap = orders.reduce((acc, order) => {
-    if (order.state === EOrderState.Cancel) {
+    if (
+      order.state === EOrderState.Cancel ||
+      order.market.includes(selectedCurrency)
+    ) {
       return acc;
     }
 
@@ -92,17 +95,25 @@ export const getPercentage = (
   return ((profitInRs / investedValue) * 100).toFixed(2);
 };
 
-export const getInstruments = (tickers: any): Instrument[] => {
-  return Object.entries(getOrders()).map(([type, list]) => {
-    const defaultInstrument = {
+const getDefaultInstrument = ({ name, ltp }: any) => ({
+  name,
+  qty: 0,
+  totalInvested: 0,
+  averagePrice: 0,
+  currentValue: 0,
+  ltp,
+  profitInPercentage: "0",
+});
+
+export const getInstruments = (
+  tickers: any,
+  selectedCurrency: string
+): Instrument[] => {
+  return Object.entries(getOrders(selectedCurrency)).map(([type, list]) => {
+    const defaultInstrument = getDefaultInstrument({
       name: coinNames[type],
-      qty: 0,
-      totalInvested: 0,
-      averagePrice: 0,
-      currentValue: 0,
       ltp: tickers[type].buy,
-      profitInPercentage: "0",
-    };
+    });
 
     return list.reduce((ob, { origin_volume, price }, index) => {
       ob.qty += parseFloat(origin_volume);

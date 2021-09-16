@@ -4,14 +4,14 @@ import { getInstruments, getPercentage, Instrument } from "../apis/orders";
 
 const url = "api/v2/tickers";
 
-const useLiveData = () => {
+const useLiveData = ({ currency }: { currency: string }) => {
   const [loading, setLoading] = useState(false);
   const [orders, setOrders] = useState<Instrument[]>([]);
 
   const getLiveMarketData = async () => {
     try {
       const { data } = await axios.get(url);
-      setOrders(getInstruments(data));
+      setOrders(getInstruments(data, currency));
     } catch (e) {
       console.log(e);
     }

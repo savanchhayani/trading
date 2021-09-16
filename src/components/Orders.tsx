@@ -60,7 +60,7 @@ const Orders = () => {
     totalInvested,
     totalCurrentValue,
     profitInPercentage,
-  } = useLiveData();
+  } = useLiveData({ currency: "inr" });
 
   return (
     <StyledOrdersContainer>
