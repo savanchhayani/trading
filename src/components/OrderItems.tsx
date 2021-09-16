@@ -5,6 +5,7 @@ import styled from "styled-components";
 const StyledOrdersItems = styled.div`
   overflow-y: auto;
   max-height: 80%;
+  min-height: 85%;
 
   /* width */
   ::-webkit-scrollbar {
