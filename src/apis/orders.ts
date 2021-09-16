@@ -53,7 +53,7 @@ export interface Instrument {
   profitInPercentage: string;
 }
 
-const coinNames: { [key: string]: string } = {
+const indCoinNames = {
   wrxinr: "WazirX Token (WRX)",
   shibinr: "SHIBA INU (SHIB)",
   usdtinr: "Tether USD (USDT)",
@@ -65,6 +65,20 @@ const coinNames: { [key: string]: string } = {
   dogeinr: "Dogecoin (DOGE)",
   pushinr: "Ethereum Push Notification Service (PUSH)",
   wininr: "WINk (WIN)",
+};
+
+const usdtCoinNames = {
+  sklusdt: "USDT - SKALE Network (SKL)",
+  winusdt: "USDT - WINk (WIN)",
+  solusdt: "USDT - Solana (SOL)",
+  pushusdt: "USDT - Ethereum Push Notification Service (PUSH)",
+  xrpusdt: "USDT - Ripple (XRP)",
+  btcusdt: "USDT - Bitcoin (BTC)",
+};
+
+const coinNames: { [key: string]: string } = {
+  ...indCoinNames,
+  ...usdtCoinNames,
 };
 
 const getToFixed2 = (value: number) => parseFloat(value.toFixed(2));

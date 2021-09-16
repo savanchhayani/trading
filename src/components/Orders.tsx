@@ -12,6 +12,7 @@ const StyledOrdersContainer = styled.div`
   background: rgb(24, 24, 24);
   padding: 10px;
   max-width: 1080px;
+  height: 90vh;
 `;
 
 const StyledTitlePrice = styled.div``;
