@@ -3,6 +3,7 @@ import OrderHeader from "./OrderHader";
 import OrderItems from "./OrderItems";
 import useLiveData from "../hooks/useLiveData";
 import { getPercentage } from "../apis/orders";
+import { useState } from "react";
 
 const StyledOrdersContainer = styled.div`
   display: flex;
@@ -53,17 +54,32 @@ const StyledPercentage = styled.span`
   font-size: 12px;
 `;
 
+const Dropdown = ({ selectedValue, onChange }: any) => (
+  <select value={selectedValue} onChange={onChange}>
+    <option value="usdt">USDT</option>
+    <option value="inr">INR</option>
+  </select>
+);
+
 const Orders = () => {
+  const [selectedCurrency, setSelectedCurrency] = useState("usdt");
   const {
     loading,
     orders,
     totalInvested,
     totalCurrentValue,
     profitInPercentage,
-  } = useLiveData({ currency: "inr" });
+  } = useLiveData({ currency: selectedCurrency });
 
   return (
     <StyledOrdersContainer>
+      <Dropdown
+        selectedValue={selectedCurrency}
+        onChange={(e: any) => {
+          console.log(e.target.value);
+          setSelectedCurrency(e.target.value);
+        }}
+      />
       <OrderHeader />
       <OrderItems orders={orders} />
 

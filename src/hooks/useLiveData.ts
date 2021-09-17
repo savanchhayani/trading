@@ -23,7 +23,7 @@ const useLiveData = ({ currency }: { currency: string }) => {
     return () => {
       clearInterval(interval);
     };
-  }, []);
+  }, [currency]);
 
   const { totalInvested, totalCurrentValue } = orders.reduce(
     (ob, i) => {
