@@ -1,6 +1,6 @@
 import "./styles.css";
 import styled from "styled-components";
-import Orders from "./components/Orders";
+import Orders from "./components/Orders/Orders";
 import { useEffect } from "react";
 
 const StyledApp = styled.div`

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { orderColumns } from "./styles";
+import { orderColumns } from "../styles";
 
 const StyledHeader = styled.div`
   display: flex;

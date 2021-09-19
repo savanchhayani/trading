@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { orderColumns } from "./styles";
-import { Instrument } from "../apis/orders";
+import { orderColumns } from "../styles";
+import { Instrument } from "../../apis/orders";
 import { StyledForPerText } from "./Orders";
 
 const StyledOrder = styled.div`
