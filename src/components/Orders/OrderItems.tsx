@@ -1,7 +1,7 @@
 import OrderItem from "./OrderItem";
-import { Instrument } from "../../apis/orders";
 import styled from "styled-components";
 import scrollbar from "../../styles/scrollbar";
+import { Instrument } from "../../types/orders";
 
 const StyledOrdersItems = styled.div`
   overflow-y: auto;

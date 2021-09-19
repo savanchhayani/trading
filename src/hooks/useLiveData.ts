@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { getInstruments, getPercentage, Instrument } from "../apis/orders";
+import { Instrument } from "../types/orders";
+import { getInstruments } from "../utils/orders/getInstruments";
+import { getPercentage } from "../utils/math";
 
 const url = "api/v2/tickers";
 
