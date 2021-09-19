@@ -1,14 +1,15 @@
 import { ChangeEvent } from "react";
+import { ECurrency } from "../types/enum";
 
 interface Props {
   selectedValue: string;
   onChange(e: ChangeEvent<HTMLSelectElement>): void;
 }
 
-const Dropdown = ({ selectedValue, onChange }: any) => (
+const Dropdown = ({ selectedValue, onChange }: Props) => (
   <select value={selectedValue} onChange={onChange}>
-    <option value="usdt">USDT</option>
-    <option value="inr">INR</option>
+    <option value={ECurrency.USDT}>USDT</option>
+    <option value={ECurrency.INR}>INR</option>
   </select>
 );
 

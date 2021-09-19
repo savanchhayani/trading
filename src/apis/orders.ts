@@ -20,10 +20,9 @@ type OrdersMap = { [key: Market]: Order[] };
 
 export const getOrders = (selectedCurrency: string) => {
   const ordersMap: OrdersMap = orders.reduce((acc, order) => {
-    if (
-      order.state === EOrderState.Cancel ||
-      !order.market.includes(selectedCurrency)
-    ) {
+    const [_, currency] = order.market.split(selectedCurrency);
+
+    if (order.state === EOrderState.Cancel || currency !== "") {
       return acc;
     }
 

@@ -6,6 +6,7 @@ import { ChangeEvent, useState } from "react";
 import CurrencyDropdown from "../CurrencyDropdown";
 import Footer from "./Footer";
 import colors from "../../styles/colors";
+import { ECurrency } from "../../types/enum";
 
 const StyledOrdersContainer = styled.div`
   display: flex;
@@ -27,7 +28,8 @@ export const StyledProfitInRs = styled.span`
 `;
 
 const Orders = () => {
-  const [selectedCurrency, setSelectedCurrency] = useState("usdt");
+  const [selectedCurrency, setSelectedCurrency] = useState(ECurrency.USDT);
+
   const {
     loading,
     orders,
@@ -36,14 +38,14 @@ const Orders = () => {
     profitInPercentage,
   } = useLiveData({ currency: selectedCurrency });
 
+  const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    // @ts-ignore
+    setSelectedCurrency(e.target.value);
+  };
+
   return (
     <StyledOrdersContainer>
-      <CurrencyDropdown
-        selectedValue={selectedCurrency}
-        onChange={(e: ChangeEvent<HTMLSelectElement>) => {
-          setSelectedCurrency(e.target.value);
-        }}
-      />
+      <CurrencyDropdown selectedValue={selectedCurrency} onChange={onChange} />
       <OrderHeader />
       <OrderItems orders={orders} />
       <Footer
