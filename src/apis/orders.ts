@@ -22,7 +22,7 @@ export const getOrders = (selectedCurrency: string) => {
   const ordersMap: OrdersMap = orders.reduce((acc, order) => {
     if (
       order.state === EOrderState.Cancel ||
-      order.market.includes(selectedCurrency)
+      !order.market.includes(selectedCurrency)
     ) {
       return acc;
     }
