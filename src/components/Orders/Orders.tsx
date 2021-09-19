@@ -28,7 +28,9 @@ export const StyledProfitInRs = styled.span`
 `;
 
 const Orders = () => {
-  const [selectedCurrency, setSelectedCurrency] = useState(ECurrency.USDT);
+  const [selectedCurrency, setSelectedCurrency] = useState<string>(
+    ECurrency.USDT
+  );
 
   const {
     loading,
@@ -38,14 +40,12 @@ const Orders = () => {
     profitInPercentage,
   } = useLiveData({ currency: selectedCurrency });
 
-  const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    // @ts-ignore
-    setSelectedCurrency(e.target.value);
-  };
-
   return (
     <StyledOrdersContainer>
-      <CurrencyDropdown selectedValue={selectedCurrency} onChange={onChange} />
+      <CurrencyDropdown
+        selectedValue={selectedCurrency}
+        onChange={setSelectedCurrency}
+      />
       <OrderHeader />
       <OrderItems orders={orders} />
       <Footer

@@ -1,16 +1,31 @@
-import { ChangeEvent } from "react";
+import { Select } from "antd";
 import { ECurrency } from "../types/enum";
+import styled from "styled-components";
+
+const { Option } = Select;
 
 interface Props {
   selectedValue: string;
-  onChange(e: ChangeEvent<HTMLSelectElement>): void;
+  onChange(value: string): void;
 }
 
-const Dropdown = ({ selectedValue, onChange }: Props) => (
-  <select value={selectedValue} onChange={onChange}>
-    <option value={ECurrency.USDT}>USDT</option>
-    <option value={ECurrency.INR}>INR</option>
-  </select>
-);
+const StyledSelectContainer = styled.div`
+  align-self: flex-end;
+`;
 
-export default Dropdown;
+const CurrencyDropdown = ({ selectedValue, onChange }: Props) => {
+  return (
+    <StyledSelectContainer>
+      <Select
+        defaultValue={selectedValue}
+        style={{ width: 120 }}
+        onChange={onChange}
+      >
+        <Option value={ECurrency.USDT}>USDT</Option>
+        <Option value={ECurrency.INR}>INR</Option>
+      </Select>
+    </StyledSelectContainer>
+  );
+};
+
+export default CurrencyDropdown;
